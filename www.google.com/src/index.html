@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon" />
+    <!-- TITLE -->
+    <title>Google</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../dist/style.css" />
+    <!-- Js -->
+    <script src="https://cse.google.com/cse.js?cx=5269ce16d197347ea"></script>
+    <!-- Internal Css -->
+    <style>
+      #linkContainer::-webkit-scrollbar {
+        width: 9px;
+        background: white;
+        border-radius: 6px;
+      }
+
+      #linkContainer::-webkit-scrollbar-thumb {
+        background-color: #dadce0;
+        border-radius: 30px;
+      }
+    </style>
+  </head>
+
+  <body class="overflow-hidden">
+    <!-- Google code -->
+    <div class="gcse-search"></div>
+    <!-- Feedback container -->
+    <div
+      class="absolute right-0 bg-[#1f1f1f] shadow-[rgba(0,0,0,0.6)] shadow-xl w-[421px] h-full z-50 rounded-tl-xl rounded-bl-xl hidden"
+      id="feedBackCont"
+    >
+      <div class="flex flex-col text-white">
+        <!-- Top -->
+        <div
+          class="flex flex-row items-center justify-between p-3 m-0.5 shadow-full shadow-[rgba(0,0,0,0.6)] rounded-tl-xl"
+        >
+          <!-- Heading -->
+          <div class="p-0.5">
+            <p class="font-sans text-xl">Send feedback to Google</p>
+          </div>
+          <!-- Close icon -->
+          <div id="closeFeedbackBTn"
+            class="px-4 pt-1 pb-2 rounded-full hover:bg-[#ffffff21] cursor-pointer flex items-center justify-center"
+          >
+            <p class="font-mono text-2xl text-[#ababab]">x</p>
+          </div>
+        </div>
+        <!-- Mid -->
+        <div class="overflow-x-hidden overflow-y-auto h-[77vh] pb-5">
+          <div class="flex flex-col p-1">
+            <div class="p-2 m-0.5">
+              <p class="text-base">Describe your feedback</p>
+            </div>
+            <div
+              class="bg-transparent pt-4 mx-3 my-1 border-[1px] border-[#c4c7c5] rounded-md"
+            >
+              <textarea
+                id="userFeedback_inp"
+                class="h-[92px] w-full px-[15px] pt-0 pb-[15px] outline-none resize-y text-[#e3e3e3] bg-transparent font-normal placeholder:text-white"
+                cols="30"
+                rows="10"
+                placeholder="Tell us what prompted this feedback..."
+              ></textarea>
+            </div>
+            <div class="p-1 mx-1 flex flex-row items-center">
+              <p class="px-1 text-xs font-sans font-normal">
+                Please don't include any sensitive information
+              </p>
+              <div class="mx-0.5 cursor-default">
+                <p class="px-[5px] py-0 rounded-full border-white border-[1px] text-xs font-normal">?</p>
+                </svg>
+              </div>
+            </div>
+            <div class="relative top-44">
+              <div class="flex flex-row m-4 items-center">
+                <div class="px-2 py-1 hover:bg-[#ffffff2b] rounded-full">
+                  <div class="w-4 h-4 bg-transparent absolute cursor-pointer rounded-sm border-[2px] border-[#dadce0] mt-[5px] ml-[-2px]"></div>
+                  <input type="checkbox" class="cursor-pointer relative" name="checkME" id="checkME" />
+                </div>
+                <div class="p-1">
+                  <label for="checkME" class="text-sm font-sans cursor-pointer"
+                    >We may email you for more information or updates</label
+                  >
+                </div>
+              </div>
+              <div class="mx-1 px-1">
+                <div class="px-1">
+                  <p class="text-white text-xs font-sans p-0.5">
+                    Some
+                    <a href="" class="text-[#7cacf8] underline"
+                      >account and system information</a
+                    >
+                    may be sent to Google. We will use it to fix problems and
+                    improve our services, subject to our
+                    <a href="https://myaccount.google.com/privacypolicy?hl=en&authuser=0" class="text-[#7cacf8] underline">
+                      Privacy Policy</a
+                    >
+                    and of
+                    <a href="https://policies.google.com/terms?hl=en&authuser=0" class="text-[#7cacf8] underline"
+                      >Terms of Service</a
+                    >. We may email you for more information or updates. Go to
+                    <a href="https://support.google.com/legal/answer/3110420?hl=en&authuser=0" class="text-[#7cacf8] underline">Legal Help</a>
+                    to ask for content changes for legal reasons.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Bottom -->
+        <div
+          class="bg-[#1f1f1f] p-5 shadow-full shadow-[rgba(0,0,0,0.6)] absolute bottom-0 right-0 left-0"
+        >
+          <div class="bg-transparent p-1">
+            <div class="flex items-end justify-end bg-transparent px-0.5">
+              <button
+                class="text-[rgba(227,227,227,0.722)] rounded-md bg-[rgba(227,227,227,0.122)] px-6 py-2 capitalize"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Hidden Layer -->
+    <div
+      id="hiddenLayer"
+      class="fixed top-0 left-0 right-0 bottom-0 bg-transparent z-20 hidden"
+    ></div>
+    <!-- Header -->
+    <div class="bg-white p-2.5 w-full">
+      <div class="flex flex-row items-center justify-end capitalize w-full">
+        <div class="px-2">
+          <a
+            href="https://mail.google.com/mail/"
+            target="_top"
+            class="hover:underline cursor-pointer font-sans text-sm"
+            >gmail</a
+          >
+        </div>
+        <div class="px-2">
+          <a href="" class="hover:underline cursor-pointer font-sans text-sm"
+            >images</a
+          >
+        </div>
+        <div class="flex flex-row items-center justify-center ml-4">
+          <!-- Tool Tip -->
+          <div
+            class="absolute mt-[83px] ml-[-43px] z-50 hidden"
+            id="productBtn_toolTip"
+          >
+            <div
+              class="px-[9px] py-[6px] rounded-md bg-[rgba(60,64,67,.9)] flex items-center justify-center"
+            >
+              <span class="text-xs text-white" style="text-transform: none"
+                >Google apps</span
+              >
+            </div>
+          </div>
+          <!-- Products -->
+          <div
+            class="bg-white shadow-full rounded-md absolute top-20 right-10 p-1 pb-0 hidden z-40"
+            id="productsCont"
+          >
+            <div
+              class="flex flex-col font-sans p-3 pb-0 overflow-x-hidden overflow-y-auto h-[410px]"
+              id="linkContainer"
+            >
+              <!-- row 1 -->
+              <div class="flex flex-row items-center justify-evenly">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/youtube.svg"
+                      alt="youtube"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">youtube</p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)] text-sm"
+                >
+                  <div class="p-1">
+                    <div
+                      class="font-sans text-white bg-[#ec407a] rounded-full px-3 py-1"
+                    >
+                      <p class="uppercase text-3xl">k</p>
+                    </div>
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">account</p>
+                  </div>
+                </div>
+                <!-- link 3 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/google_icon.svg"
+                      alt="search"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">search</p>
+                  </div>
+                </div>
+              </div>
+              <!-- row 2 -->
+              <div class="flex flex-row items-center justify-evenly">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/map_icon.svg"
+                      alt="maps"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">maps</p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/play_icon.svg"
+                      alt="play"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">play</p>
+                  </div>
+                </div>
+                <!-- link 3 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/mail_icon.svg"
+                      alt="gmail"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">gmail</p>
+                  </div>
+                </div>
+              </div>
+              <!-- row 3 -->
+              <div class="flex flex-row items-center justify-evenly">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/contacts_icon.svg"
+                      alt="contacts_icon"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">contacts</p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/drive_icon.svg"
+                      alt="drive"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">drive</p>
+                  </div>
+                </div>
+                <!-- link 3 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/calender_icon.svg"
+                      alt="calender"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">calender</p>
+                  </div>
+                </div>
+              </div>
+              <!-- row 4 -->
+              <div class="flex flex-row items-center justify-evenly">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/photos_icon.svg"
+                      alt="photos_icon"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">photos</p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/shopping_icon.svg"
+                      alt="shopping"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">shopping</p>
+                  </div>
+                </div>
+                <!-- link 3 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/news_icon.svg"
+                      alt="news"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">news</p>
+                  </div>
+                </div>
+              </div>
+              <!-- row 5 -->
+              <div class="flex flex-row items-center justify-evenly">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/meet_icon.svg"
+                      alt="meet"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">meet</p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/chat_icon.svg"
+                      alt="chat"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">chat</p>
+                  </div>
+                </div>
+                <!-- link 3 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/translate_icon.svg"
+                      alt="translate"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">translate</p>
+                  </div>
+                </div>
+              </div>
+              <!-- row 6 -->
+              <div class="flex flex-row items-center">
+                <!-- link 1 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/business_icon.svg"
+                      alt="business_icon"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">
+                      business profile manager
+                    </p>
+                  </div>
+                </div>
+                <!-- link 2 -->
+                <div
+                  class="w-20 h-auto mx-2 my-0 p-2 cursor-pointer flex flex-col items-center justify-center bg-white rounded-md hover:bg-[rgb(232,240,254)]"
+                >
+                  <div class="p-1">
+                    <img
+                      class="w-9 h-auto"
+                      src="../img/ad_center_icon.png"
+                      alt="ad_center_icon"
+                    />
+                  </div>
+                  <div class="p-0.5">
+                    <p class="text-black font-sans font-normal">My Ad center</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Products btn -->
+          <div
+            class="p-3 hover:bg-[#eee] rounded-full flex flex-col cursor-pointer mx-0.5"
+            id="productBtn"
+          >
+            <div class="flex flex-row">
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+            </div>
+            <div class="flex flex-row">
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+            </div>
+            <div class="flex flex-row">
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+              <div class="rounded-full p-0.5 m-[1.6px] bg-[#5f6368]"></div>
+            </div>
+          </div>
+          <!-- User account icon -->
+          <div
+            class="p-1 hover:bg-[rgba(60,64,67,.08)] cursor-pointer rounded-full ml-3"
+            id="userAccount_btn"
+          >
+            <p
+              class="uppercase font-sans text-white bg-[#ec407a] rounded-full px-3 py-1"
+            >
+              K
+            </p>
+            <!-- Tool Tip -->
+            <div
+              class="absolute top-14 right-3 z-50 hidden"
+              id="userAccount_toolTip"
+            >
+              <div
+                class="px-[9px] py-[6px] rounded-md bg-[rgba(60,64,67,.9)] flex flex-col items-start"
+              >
+                <span class="text-sm text-white" style="text-transform: none"
+                  >Google account</span
+                >
+                <span class="text-xs text-[#c4c4c4] capitalize"
+                  >Karan Yadav</span
+                >
+                <span
+                  class="text-xs text-[#c4c4c4]"
+                  style="text-transform: none"
+                  >xpresskaran98@gmail.com</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- body -->
+    <div class="p-1 bg-white dark:[#202124] w-full h-[70vh] flex items-center justify-center">
+      <div class="p-1 m-1 bg-white flex items-center justify-center">
+        <div class="p-1 m-1 flex flex-col items-center justify-center">
+          <!-- Logo -->
+          <div class="mx-1 mt-8 mb-3 p-1 flex flex-row">
+            <img
+              src="../img/googleLogo_light.png"
+              alt="Google"
+              class="w-auto h-auto p-1 m-0.5"
+            />
+            <p class="text-black text-sm" title="made by karan yadav">
+              ©️ Karan Yadav 2023 - ♾️
+            </p>
+          </div>
+          <!-- Search -->
+          <div class="p-2 my-3 mx-2">
+            <div
+              class="flex flex-row items-center hover:shadow-full hover:shadow-[#dadce0] rounded-full"
+              id="mainParent_searchBox"
+            >
+              <div
+                class="border-[#dadce0] border-[1px] rounded-l-full border-r-0 p-[16px]"
+              >
+                <div class="absolute w-4 h-4 bg-[#ffffffa8]"></div>
+                <img
+                  src="../img/search_icon.png"
+                  alt="search"
+                  class="w-4 h-4"
+                />
+              </div>
+              <div
+                class="border-[#dadce0] border-[1px] border-l-0 border-r-0 p-[12px] flex items-center pl-0 pr-0"
+              >
+                <textarea
+                  title="Search"
+                  name="googleSearch"
+                  id="googleSearch"
+                  cols="30"
+                  rows="10"
+                  class="resize-none outline-none w-auto sm:w-[384px] md:w-[440px] lg:w-[490px] h-6 overflow-hidden"
+                ></textarea>
+              </div>
+              <div
+                class="border-[#dadce0] border-[1px] border-l-0 border-r-0 py-[16px] flex items-center"
+                id="crossParent"
+              >
+                <div
+                  class="absolute w-4 h-4 bg-[#ffffff7d]"
+                  id="crossBtn"
+                ></div>
+                <img
+                  src="../img/cross_icon.svg"
+                  alt="cross"
+                  class="w-4 invisible"
+                  id="crossSign"
+                />
+                <!-- Tool Tip -->
+                <div
+                  class="bg-white px-[0.9px] py-[1px] shadow-full absolute mt-20 ml-[-15px] hidden"
+                  id="cross_icon_toolTip"
+                >
+                  <div
+                    class="bg-black py-0.5 px-1 text-center before:content-[''] before:absolute before:bg-black before:w-3 before:h-3 before:rotate-45 before:mx-3 before:mt-[-5px] before:shadow-full"
+                  >
+                    <span
+                      class="font-semibold font-sans text-white text-xs capitalize p-1"
+                      >clear</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div
+                class="flex flex-row items-center justify-center border-[#dadce0] border-[1px] rounded-r-full border-l-0 p-[12.5px]"
+              >
+                <div class="cursor-pointer mx-2 pl-2" id="voice_icon_parent">
+                  <img
+                    src="../img/voice_icon.svg"
+                    alt="voice"
+                    class="w-4 mx-2"
+                  />
+                  <!-- Tool Tip -->
+                  <div
+                    class="bg-white px-[0.9px] py-[1px] shadow-full absolute mt-3 ml-[-30px] hidden"
+                    id="voice_icon_toolTip"
+                  >
+                    <div
+                      class="bg-black py-0.5 px-1 text-center before:content-[''] before:absolute before:bg-black before:w-3 before:h-3 before:rotate-45 before:mx-9 before:mt-[-4px] before:shadow-full"
+                    >
+                      <span class="font-semibold font-sans text-white text-xs"
+                        >Search by voice</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="cursor-pointer mx-2" id="lens_icon_parent">
+                  <img src="../img/lens_icon.svg" alt="lens" class="w-5 mx-2" />
+                  <!-- Tool Tip -->
+                  <div
+                    class="bg-white px-[0.9px] py-[1px] shadow-full absolute mt-3 ml-[-30px] hidden"
+                    id="lens_icon_toolTip"
+                  >
+                    <div
+                      class="bg-black py-0.5 px-1 text-center before:content-[''] before:absolute before:bg-black before:w-3 before:h-3 before:rotate-45 before:mx-9 before:mt-[-4px] before:shadow-full"
+                    >
+                      <span class="font-semibold font-sans text-white text-xs"
+                        >Search by image</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-row bg-white p-1">
+            <div class="p-1 m-1">
+              <button id="searchBtn"
+                class="text-[14px] px-4 py-2 bg-[#f8f9fa] border-[1px] border-[#f8f9fa] rounded-[4px] text-[#3c4043] font-sans hover:shadow-[rgba(0,0,0,.1)] hover:shadow-sm hover:border-[#dadce0]"
+              >
+                Google Search
+              </button>
+            </div>
+            <div class="p-1 m-1">
+              <a href="https://www.google.com/doodles"
+                ><button
+                  class="text-[14px] px-4 py-2 bg-[#f8f9fa] border-[1px] border-[#f8f9fa] rounded-[4px] text-[#3c4043] font-sans hover:shadow-[rgba(0,0,0,.1)] hover:shadow-sm hover:border-[#dadce0]"
+                >
+                  I'm Feeling Lucky
+                </button></a
+              >
+            </div>
+          </div>
+          <div class="p-1 m-1">
+            <div class="p-1 m-1 text-[14px]">
+              <p class="font-sans p-0.5 text-center">
+                Google offered in:
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=hi&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBQ"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >हिन्दी</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=bn&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBU"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >বাংলা</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=te&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBY"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >తెలుగు</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=mr&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBc"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >मराठी</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=ta&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBg"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >தமிழ்</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=gu&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBk"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >ગુજરાતી</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=kn&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBo"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >ಕನ್ನಡ</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=ml&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBs"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >മലയാളം</a
+                >
+                <a
+                  href="https://www.google.com/setprefs?sig=0_lc08T1KGm7D3jdRcATclXHKL7f0%3D&hl=pa&source=homepage&sa=X&ved=0ahUKEwjL656Rm97-AhUYBN4KHRJFC9gQ2ZgBCBw"
+                  class="text-[#1a0dab] px-1 cursor-pointer hover:underline font-normal font-sans"
+                  >ਪੰਜਾਬੀ</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div
+      class="bg-[#f2f2f2] capitalize text-[#70757a] fixed z-30 bottom-0 right-0 left-0 text-[15px] font-sans font-normal"
+    >
+      <div class="px-4 py-2 border-b-[1px] border-b-[#dadce0]">
+        <div class="p-1">
+          <p class="p-1">India</p>
+        </div>
+      </div>
+      <div
+        class="px-2.5 py-0.5 flex flex-col items-center md:justify-around lg:justify-between md:flex-row"
+      >
+        <div class="flex flex-row items-center justify-center flex-wrap px-8 py-0.5">
+          <div class="px-4 py-2">
+            <a
+              href="https://about.google/?utm_source=google-IN&utm_medium=referral&utm_campaign=hp-footer&fg=1"
+              target="_self"
+              class="hover:underline"
+              >About</a
+            >
+          </div>
+          <div class="px-3.5 py-2">
+            <a
+              href="https://ads.google.com/intl/en_in/home/?subid=ww-ww-et-g-awa-a-g_hpafoot1_1!o2m--ahpm-0000000130-0000000000&utm_source=google.com&utm_medium=referral&utm_campaign=google_hpafooter&fg=1"
+              target="_self"
+              class="hover:underline"
+              >advertising</a
+            >
+          </div>
+          <div class="px-3.5 py-2">
+            <a
+              href="https://www.google.com/intl/en_in/business/"
+              target="_self"
+              class="hover:underline"
+              >business</a
+            >
+          </div>
+          <div class="px-3.5 py-2">
+            <a
+              href="https://www.google.com/search/howsearchworks/?fg=1"
+              target="_self"
+              class="hover:underline"
+              >how search works</a
+            >
+          </div>
+        </div>
+        <div class="flex flex-row px-4 py-0.5">
+          <div class="px-3.5 py-2">
+            <a
+              href="https://policies.google.com/privacy?hl=en-IN&fg=1"
+              target="_self"
+              class="hover:underline"
+              >privacy</a
+            >
+          </div>
+          <div class="px-3.5 py-2">
+            <a
+              href="https://policies.google.com/terms?hl=en-IN&fg=1"
+              target="_self"
+              class="hover:underline"
+              >terms</a
+            >
+          </div>
+          <div class="px-3.5 py-2">
+            <div
+              class="absolute z-30 bg-white top-[-187px] right-9 p-0 font-sans text-[#202124] font-normal hidden"
+              id="settingCont"
+            >
+              <div class="flex flex-col p-0.5">
+                <div class="p-1 cursor-pointer">
+                  <a
+                    href="https://www.google.com/preferences?hl=en-IN&fg=1"
+                    class="cursor-pointer text-[15px] text-inherit"
+                    >Search settings</a
+                  >
+                </div>
+                <div class="p-1 cursor-pointer">
+                  <a
+                    href="https://www.google.com/advanced_search?hl=en-IN&fg=1"
+                    class="cursor-pointer text-[15px] text-inherit"
+                    >Advanced search</a
+                  >
+                </div>
+                <div class="p-1 cursor-pointer">
+                  <a
+                    href="https://myactivity.google.com/privacyadvisor/search?utm_source=googlemenu&fg=1"
+                    class="cursor-pointer text-[15px] text-inherit"
+                    >Your data in search</a
+                  >
+                </div>
+                <div class="p-1 cursor-pointer">
+                  <a
+                    href="https://myactivity.google.com/product/search?utm_source=google&hl=en-IN&fg=1"
+                    class="cursor-pointer text-[15px] text-inherit"
+                    >Search history</a
+                  >
+                </div>
+                <div class="p-1 cursor-pointer">
+                  <a
+                    href="https://support.google.com/websearch/?p=ws_results_help&hl=en-IN&fg=1"
+                    class="cursor-pointer text-[15px] text-inherit"
+                    >Search help</a
+                  >
+                </div>
+                <div class="p-1 cursor-pointer" id="sendFeedbackBtn">
+                  <a class="cursor-pointer text-[15px] text-inherit"
+                    >Send feedback</a
+                  >
+                </div>
+              </div>
+              <div
+                class="p-1 border-t-[1px] border-t-[#dadce0]"
+                id="toggle_theme_btn"
+              >
+                <div class="p-2 cursor-pointer flex flex-row items-center">
+                  <p class="font-sans font-[15px] text-[#202124] p-1">
+                    Dark theme: Off
+                  </p>
+                  <div class="p-[1.5px] opacity-0" id="theme_imgCont">
+                    <div
+                      class="absolute w-5 h-5 bg-[rgba(255,255,255,0.48)]"
+                    ></div>
+                    <div class="p-[0.5px]">
+                      <img
+                        src="../img/light_theme_icon.png"
+                        alt="Light theme"
+                        class="w-5"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="hover:underline cursor-pointer" id="settingBtn">
+              settings
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Js -->
+    <script defer src="../js/index.js"></script>
+  </body>
+</html>
